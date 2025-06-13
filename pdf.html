@@ -1,0 +1,14 @@
+<h2>Ledger Report</h2>
+<table border="1">
+  <tr><th>Name</th><th>Address</th><th>Credit</th><th>Debit</th><th>Remaining</th></tr>
+  {% for e in entries %}
+  <tr>
+    <td>{{ e.client_name }}</td>
+    <td>{{ e.client_address }}</td>
+    <td>{{ e.credit }}</td>
+    <td>{{ e.debit }}</td>
+    <td>{{ e.remaining }}</td>
+  </tr>
+  {% endfor %}
+</table>
+<p>Total CR: {{ total_cr }} | DR: {{ total_dr }} | Remaining: {{ total_rem }}</p>

@@ -1,0 +1,30 @@
+<form method="POST">{% csrf_token %}{{ form.as_p }}<button>Add Entry</button></form>
+
+<form method="GET">
+  <input name="client" placeholder="Search by Client" />
+  <input type="date" name="date" />
+  <button>Filter</button>
+</form>
+
+<a href="{% url 'export_pdf' %}">Export PDF</a> |
+<a href="{% url 'export_excel' %}">Export Excel</a> |
+<a href="{% url 'logout' %}">Logout</a>
+
+<table>
+  <tr><th>Name</th><th>Address</th><th>Credit</th><th>Debit</th><th>Remaining</th><th>Actions</th></tr>
+  {% for e in entries %}
+  <tr>
+    <td>{{ e.client_name }}</td>
+    <td>{{ e.client_address }}</td>
+    <td>{{ e.credit }}</td>
+    <td>{{ e.debit }}</td>
+    <td>{{ e.remaining }}</td>
+    <td>
+      <a href="{% url 'edit' e.id %}">Edit</a>
+      <a href="{% url 'delete' e.id %}">Delete</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h4>Total CR: {{ total_cr }} | Total DR: {{ total_dr }} | Total Remaining: {{ total_rem }}</h4>
